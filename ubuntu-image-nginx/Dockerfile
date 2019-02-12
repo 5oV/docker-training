@@ -2,14 +2,12 @@
 FROM ubuntu-image:v0.1
 #Who is maintainer of this Dockerfile
 MAINTAINER 5oV
-ENV HTTP_PROXY=http://172.16.3.3:3128
-ENV HTTPS_PROXY=http://172.16.3.3:3128
+EXPOSE 80
 #Installation of required packages, run the following commands
-RUN apt-get update && apt-get install nginx
-VOLUME [":/app"]
+RUN apt-get update && apt-get install -y nginx vim net-tools
 #Copy the current content from the current directory to destination /app
-COPY index.html /app
+COPY index.html /usr/share/nginx/html/
 #Set our workdir as /app, in other words the directory the container should use when it starts up
 WORKDIR /app
 #Run the command: node index.js to show us the container file content we've copied there
-CMD ["node","index.js"]
+CMD /etc/init.d/nginx start && bash
