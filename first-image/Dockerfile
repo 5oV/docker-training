@@ -6,7 +6,7 @@ MAINTAINER 5oV
 RUN apk update && apk add nodejs
 #Copy the current content from the current directory to destination /app
 COPY . /app
-#Set our workdir as /app, in other words it means change us to this directory
+#Set our workdir as /app, in other words the directory the container should use when it starts up
 WORKDIR /app
 #Run the command: node index.js to show us the container file content we've copied there
 CMD ["node","index.js"]
