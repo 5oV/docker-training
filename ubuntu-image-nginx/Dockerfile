@@ -7,8 +7,9 @@ EXPOSE 80
 #Installation of required packages, run the following commands
 RUN apt-get update && apt-get install -y apt-utils nginx vim net-tools
 #Copy the current content from the current directory to destination /app
-COPY index.html /usr/share/nginx/html/
+RUN rm /var/www/html/index.nginx-debian.html
+COPY index.html /var/www/html/
 #Set our workdir as /app, in other words the directory the container should use when it starts up
-WORKDIR /usr/share/nginx/html/
+WORKDIR /var/www/html/
 #Run the command: node index.js to show us the container file content we've copied there
-CMD /etc/init.d/nginx start -p=/usr/share/nginx/ && bash
+CMD /etc/init.d/nginx start && bash
